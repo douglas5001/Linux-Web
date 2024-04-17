@@ -1,2 +1,28 @@
 # Linux-Web
 Linux Web com docker-compose
+
+
+```
+version: '3'
+
+services:
+  webtop:
+    image: lscr.io/linuxserver/webtop:latest
+    container_name: webtop
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SUBFOLDER=/ #optional
+      - TITLE=Webtop #optional
+    volumes:
+      - /path/to/data:/config
+      - /var/run/docker.sock:/var/run/docker.sock #optional
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    shm_size: "1gb" #optional
+    restart: unless-stopped
+```
